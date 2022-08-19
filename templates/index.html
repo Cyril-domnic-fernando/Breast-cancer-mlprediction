@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+   <title>Breast Cancer Detection System</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+body{
+margin: 50px;
+background-image:linear-gradient(to bottom right, #9EFFFD, #E1A8FF);
+}
+
+    .container {
+      border-radius: 13px;
+      text-align: center;
+    }
+
+    .btn-container {
+      background: #9DFF8C;
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .head {
+      font-weight: bolder;
+    }
+
+    .btn-primary {
+      border-color: #ff33f !important;
+      color: #ffffff;
+      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      background-color: #de5499 !important;
+      border-color: #de5499 !important;
+      padding: 5px;
+    }
+
+    label {
+      width: 50%;
+    }
+
+    #predict {
+      display: none;
+    }
+
+    .form-group {
+      padding: 1px;
+      padding-left:100px;
+    }
+.labelrow {
+  text-align: left;
+  vertical-align: left;
+}
+
+.inputrow {
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+}
+.animate-charcter
+{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #231557 0%,
+    #44107a 29%,
+    #ff1361 67%,
+    #fff800 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 5s linear infinite;
+  display: inline-block;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="head">Breast Cancer Detection System</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="btn-container">
+
+          <form action="{{ url_for('predict')}}" method="post" class="form-inline">
+            <div class="row">
+                <div class="col-md-6">   
+                <img class="image" src="\static\fin.jpg" width="100%" height="100%">  
+</div>
+              <div class="col-md-6">
+                <div class="container">
+                  <font face = "Comic sans MS" size ="10"><h4>Enter Details Of The Cell</h4></font>
+                  <center>
+                  <div class="form-group">
+                        <label for="clump_thickness">Clump Thickness </label>
+                        <input size="29" type="text" class="form-control" name="clump_thickness" placeholder="Enter a value between 1 to 10" required="required">
+                  </div>
+                  <div class="form-group">
+                        <label for="uniform_cell_size">Uniform Cell size</label>
+                        <input size="29" type="text" class="form-control" name="uniform_cell_size" placeholder="Enter a value between 1 to 10" required="required">
+                  </div>
+                  <div class="form-group">
+                         <label for="uniform_cell_shape">Uniform Cellshape</label>
+                         <input size="29" type="text" class="form-control" name="uniform_cell_shape" placeholder="Enter a value between 1 to 10" required="required" />
+                  </div>
+                  <div class="form-group">
+                        <label for="marginal_adhesion">Marginal Adhesion</label>
+                        <input size="29" type="text" class="form-control" name="marginal_adhesion" placeholder="Enter a value between 1 to 10" required="required" />
+                  </div>
+                  <div class="form-group">
+                    <label for="single_epithelial_size">Single Epithelial Cell Size</label>
+                    <input size="29" type="text" class="form-control" name="single_epithelial_size" placeholder="Enter a value between 1 to 10" required="required" />
+                  </div>
+                  <div class="form-group">
+                    <label for="bare_nuclei">Bare Nuclei</label>
+                    <input size="29" type="text" class="form-control" name="bare_nuclei" placeholder="Enter a value between 1 to 10" required="required" />
+                  </div>
+                  <div class="form-group">
+                    <label for="bland_chromatin">Bland Chromatin</label>
+                    <input size="29" type="text" class="form-control" name="bland_chromatin" placeholder="Enter a value between 1 to 10" required="required" />
+                  </div>
+                  <div class="form-group">
+                    <label for="normal_nucleoli">Normal Nucleoli</label>
+                    <input size="29" type="text" class="form-control" name="normal_nucleoli" placeholder="Enter a value between 1 to 10" required="required" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="mitoses">Mitoses</label>
+                    <input size="29" type="text" class="form-control" name="mitoses" placeholder="Enter a value between 1 to 10" required="required" />
+                  </div></center>
+                 <center>
+                  <button type="submit" class="btn btn-primary btn-lg">Predict Cancer</button>
+                 </center>
+                </div>
+              </div>
+            </div>
+          </form>
+        <br />
+        <center>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1 class="animate-charcter">{{prediction_text}}</h1>
+    </div>
+  </div>
+</div>
+        </center>
+        <br />
+</body>
+</html>
